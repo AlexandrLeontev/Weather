@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/fragmentBackground">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainView"
@@ -15,36 +15,30 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="156dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size"
+            android:layout_marginTop="@dimen/city_name_margin_top"
+            android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.569"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/city1" />
+            tools:text="Москва" />
 
         <TextView
             android:id="@+id/cityCoordinates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:text="@string/tools_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cityName"
-            android:textSize="@dimen/tools_text_size" />
+            tools:text="lt/ln: 55.755826, 37.617299900000035" />
 
         <TextView
             android:id="@+id/temperatureLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_15_dp"
             android:text="@string/temperature_label"
-            android:textColor="@color/black"
-            android:textSize="@dimen/temp_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cityCoordinates" />
@@ -54,7 +48,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
-            android:textColor="@color/black"
             android:textSize="@dimen/temperature_value_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +61,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
             android:text="@string/feels_like_label"
-            android:textColor="@color/black"
-            android:textSize="@dimen/temp_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/temperatureValue" />
@@ -79,31 +70,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
-            android:textColor="@color/black"
             android:textSize="@dimen/feels_like_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/feelsLikeLabel"
             tools:text="-23" />
-
-        <FrameLayout
-            android:id="@+id/loadingLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/loadingBackground"
-            android:visibility="gone"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="16dp"
-            tools:visibility="visible">
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <FrameLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/loadingBackground"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 </FrameLayout>
 

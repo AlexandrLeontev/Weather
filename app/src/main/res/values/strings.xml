@@ -5,7 +5,4 @@
     <string name="city_coordinates">lt/ln: %s, %s"</string>
     <string name="error">Ошибка</string>
     <string name="reload">Перезагрузка</string>
-    <string name="city1">Москва</string>
-    <string name="tools_text">lt/ln: 55.755826, 37.617299900000035</string>
-
 </resources>
