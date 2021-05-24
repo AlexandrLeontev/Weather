@@ -5,8 +5,3 @@ interface Repository {
     fun getWeatherFromLocalStorageRus(): List<Weather>
     fun getWeatherFromLocalStorageWorld(): List<Weather>
 }
-
-//interface Repository {
-//    fun getWeatherFromServer(): Weather
-//    fun getWeatherFromLocalStorage(): Weather
-//}

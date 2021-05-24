@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragmentBackground">
+    android:background="@drawable/clouds2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainView"
@@ -15,12 +15,16 @@
             android:id="@+id/cityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/city_name_margin_top"
-            android:textSize="35sp"
+            android:layout_marginTop="136dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/city_text_size"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             tools:text="Москва" />
 
         <TextView
@@ -28,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/coordinates_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cityName"
@@ -38,6 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/temperature_value_text_size"
             android:text="@string/temperature_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +55,7 @@
             android:id="@+id/temperatureValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/margin_15_dp"
             android:textSize="@dimen/temperature_value_text_size"
             android:textStyle="bold"
@@ -60,6 +69,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/feels_like_text_size"
             android:text="@string/feels_like_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
             android:textSize="@dimen/feels_like_text_size"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

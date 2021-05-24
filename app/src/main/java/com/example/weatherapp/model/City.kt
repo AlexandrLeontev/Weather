@@ -9,9 +9,3 @@ data class City(
         val lat: Double,
         val lon: Double
 ) : Parcelable
-
-//data class City(
-//    val city: String,
-//    val lat: Double,
-//    val lon: Double
-//)

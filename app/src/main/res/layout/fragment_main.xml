@@ -30,6 +30,8 @@
         android:layout_height="match_parent"
         android:background="@color/loadingBackground"
         android:visibility="gone"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="166dp"
         tools:visibility="visible">
 
         <ProgressBar

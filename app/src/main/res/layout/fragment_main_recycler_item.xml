@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/recycler_item_padding"
         android:textSize="@dimen/recycler_item_text_size"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Москва" />
