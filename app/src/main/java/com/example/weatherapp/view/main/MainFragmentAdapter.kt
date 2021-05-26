@@ -25,12 +25,12 @@ class MainFragmentAdapter(private var onItemViewClickListener: OnItemViewClickLi
     }
 
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+            parent: ViewGroup,
+            viewType: Int
     ): MainViewHolder {
         return MainViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_main_recycler_item, parent, false) as View
+                LayoutInflater.from(parent.context)
+                        .inflate(R.layout.fragment_main_recycler_item, parent, false) as View
         )
     }
 
@@ -45,10 +45,16 @@ class MainFragmentAdapter(private var onItemViewClickListener: OnItemViewClickLi
     inner class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(weather: Weather) {
-            itemView.findViewById<TextView>(R.id.mainFragmentRecyclerItemTextView).text =
-                weather.city.city
-            itemView.setOnClickListener {
-                onItemViewClickListener?.onItemViewClick(weather)
+//            itemView.findViewById<TextView>(R.id.mainFragmentRecyclerItemTextView).text =
+//                weather.city.city
+//            itemView.setOnClickListener {
+
+            itemView.apply {
+                findViewById<TextView>(R.id.mainFragmentRecyclerItemTextView).text =
+                        weather.city.city
+                setOnClickListener {
+                    onItemViewClickListener?.onItemViewClick(weather)
+                }
             }
         }
     }

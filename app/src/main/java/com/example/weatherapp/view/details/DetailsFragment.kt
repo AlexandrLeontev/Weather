@@ -10,7 +10,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentDetailsBinding
 import com.example.weatherapp.model.Weather
 
-class DetailsFragment : Fragment() {
+class       DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
@@ -25,17 +25,24 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val weather = arguments?.getParcelable<Weather>(BUNDLE_EXTRA)
-        if (weather != null) {
-            val city = weather.city
-            binding.cityName.text = city.city
-            binding.cityCoordinates.text = String.format(
-                getString(R.string.city_coordinates),
-                city.lat.toString(),
-                city.lon.toString()
-            )
-            binding.temperatureValue.text = weather.temperature.toString()
-            binding.feelsLikeValue.text = weather.feelsLike.toString()
+//        val weather = arguments?.getParcelable<Weather>(BUNDLE_EXTRA)
+//        if (weather != null) {
+//            val city = weather.city
+//            binding.cityName.text = city.city
+//            binding.cityCoordinates.text = String.format(
+//                getString(R.string.city_coordinates),
+
+        arguments?.getParcelable<Weather>(BUNDLE_EXTRA)?.let { weather ->
+            weather.city.also { city ->
+                binding.cityName.text = city.city
+                binding.cityCoordinates.text = String.format(
+                        getString(R.string.city_coordinates),
+                        city.lat.toString(),
+                        city.lon.toString()
+                )
+                binding.temperatureValue.text = weather.temperature.toString()
+                binding.feelsLikeValue.text = weather.feelsLike.toString()
+            }
         }
     }
 
