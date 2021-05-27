@@ -1,6 +1,5 @@
 package com.example.weatherapp.view.details
 
-
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,7 +30,6 @@ class DetailsFragment : Fragment() {
                 }
             }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,19 +41,6 @@ class DetailsFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        arguments?.getParcelable<Weather>(BUNDLE_EXTRA)?.let { weather ->
-//            weather.city.also { city ->
-//                binding.cityName.text = city.city
-//                binding.cityCoordinates.text = String.format(
-//                        getString(R.string.city_coordinates),
-//                        city.lat.toString(),
-//                        city.lon.toString()
-//                )
-//                binding.temperatureValue.text = weather.temperature.toString()
-//                binding.feelsLikeValue.text = weather.feelsLike.toString()
-//            }
-//        }
-//    }
         weatherBundle = arguments?.getParcelable(BUNDLE_EXTRA) ?: Weather()
         binding.mainView.visibility = View.GONE
         binding.loadingLayout.visibility = View.VISIBLE
@@ -86,9 +71,7 @@ class DetailsFragment : Fragment() {
     }
 
     companion object {
-
         const val BUNDLE_EXTRA = "weather"
-
         fun newInstance(bundle: Bundle): DetailsFragment {
             val fragment = DetailsFragment()
             fragment.arguments = bundle

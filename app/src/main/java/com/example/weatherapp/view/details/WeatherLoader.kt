@@ -2,9 +2,9 @@ package com.example.weatherapp.view.details
 
 import android.os.Build
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.model.WeatherDTO
 import com.google.gson.Gson
 import java.io.BufferedReader
@@ -17,14 +17,17 @@ import javax.net.ssl.HttpsURLConnection
 private const val YOUR_API_KEY = "b06498a8-768d-4aec-ad83-84d9d309e06d"
 
 @RequiresApi(Build.VERSION_CODES.N)
-class WeatherLoader(private val listener: WeatherLoaderListener, private val lat: Double, private val lon: Double) {
+class WeatherLoader(
+    private val listener: WeatherLoaderListener,
+    private val lat: Double,
+    private val lon: Double
+    ) {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun loadWeather() {
         try {
-            val uri =
-                    URL("https://api.weather.yandex.ru/v2/informers?lat=${lat}&lon=${lon}")
-            val handler = Handler()
+            val uri = URL("https://api.weather.yandex.ru/v2/informers?lat=${lat}&lon=${lon}")
+            val handler = Handler(Looper.getMainLooper())
             Thread(Runnable {
                 lateinit var urlConnection: HttpsURLConnection
                 try {
@@ -35,12 +38,9 @@ class WeatherLoader(private val listener: WeatherLoaderListener, private val lat
                             YOUR_API_KEY
                     )
                     urlConnection.readTimeout = 10000
-                    val bufferedReader =
-                            BufferedReader(InputStreamReader(urlConnection.inputStream))
-
+                    val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
                     // преобразование ответа от сервера (JSON) в модель данных (WeatherDTO)
-                    val weatherDTO: WeatherDTO =
-                            Gson().fromJson(getLines(bufferedReader), WeatherDTO::class.java)
+                    val weatherDTO: WeatherDTO = Gson().fromJson(getLines(bufferedReader), WeatherDTO::class.java)
                     handler.post { listener.onLoaded(weatherDTO) }
                 } catch (e: Exception) {
                     Log.e("", "Fail connection", e)
