@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 //}
-
     private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
