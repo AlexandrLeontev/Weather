@@ -57,7 +57,6 @@ class WeatherLoader(private val listener: WeatherLoaderListener, private val lat
         }
     }
 
-
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getLines(reader: BufferedReader): String {
         return reader.lines().collect(Collectors.joining("\n"))
