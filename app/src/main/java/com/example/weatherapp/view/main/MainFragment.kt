@@ -1,5 +1,6 @@
 package com.example.weatherapp.view.main
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +20,12 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-     private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
-//    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java) }
     private var isDataSetRus: Boolean = true
     private val adapter = MainFragmentAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(weather: Weather) {
-        activity?.supportFragmentManager?.apply {
-            beginTransaction()
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
                     .add(R.id.container, DetailsFragment.newInstance(Bundle().apply {
                         putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
                     }))
@@ -40,23 +40,15 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.getRoot()
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mainFragmentRecyclerView.adapter = adapter
         binding.mainFragmentFAB.setOnClickListener { changeWeatherDataSet() }
-      //  viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
         viewModel.getWeatherFromLocalSourceRus()
-
-        binding.mainFragmentFAB
-            .animate()
-            .scaleXBy(1.0f)
-            .scaleYBy(1.0f)
-            .setDuration(5000L)
-            .start()
     }
 
     override fun onDestroy() {
@@ -87,18 +79,22 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 binding.mainFragmentLoadingLayout.visibility = View.GONE
                 binding.mainFragmentRootView.showSnackBar(
-                        getString(R.string.error),
-                        getString(R.string.reload),
-                        { viewModel.getWeatherFromLocalSourceRus() })
+                    getString(R.string.error),
+                    getString(R.string.reload),
+                    { viewModel.getWeatherFromLocalSourceRus() })
             }
         }
     }
 
+    interface OnItemViewClickListener {
+        fun onItemViewClick(weather: Weather)
+    }
+
     private fun View.showSnackBar(
-            text: String,
-            actionText: String,
-            action: (View) -> Unit,
-            length: Int = Snackbar.LENGTH_INDEFINITE
+        text: String,
+        actionText: String,
+        action: (View) -> Unit,
+        length: Int = Snackbar.LENGTH_INDEFINITE
     ) {
         Snackbar.make(this, text, length).setAction(actionText, action).show()
     }
@@ -108,12 +104,7 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    interface OnItemViewClickListener {
-        fun onItemViewClick(weather: Weather)
-    }
-
     companion object {
-        fun newInstance() =
-            MainFragment()
+        fun newInstance() = MainFragment()
     }
 }
