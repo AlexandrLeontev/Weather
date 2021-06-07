@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15_dp"
-            android:textSize="@dimen/temperature_value_text_size"
+            android:textSize="@dimen/feels_like_text_size"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
