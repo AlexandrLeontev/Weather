@@ -20,7 +20,7 @@
         </activity>
 
         <service android:name=".view.experiments.MainService" />
-        <service android:name=".view.details.DetailsService" />
+
         <receiver android:name=".view.MainBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />

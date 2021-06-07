@@ -3,7 +3,6 @@ package com.example.weatherapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weatherapp.model.Repository
 import com.example.weatherapp.model.RepositoryImpl
 import java.lang.Thread.sleep
 
