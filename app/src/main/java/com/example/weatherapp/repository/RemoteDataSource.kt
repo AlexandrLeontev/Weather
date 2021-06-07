@@ -1,6 +1,5 @@
 package com.example.weatherapp.repository
 
-import com.example.weatherapp.BuildConfig
 import com.example.weatherapp.model.WeatherDTO
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -10,6 +9,8 @@ import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+
+private const val YOUR_API_KEY = "b06498a8-768d-4aec-ad83-84d9d309e06d"
 
 class RemoteDataSource {
 
@@ -24,7 +25,7 @@ class RemoteDataSource {
         .build().create(WeatherAPI::class.java)
 
     fun getWeatherDetails(lat: Double, lon: Double, callback: Callback<WeatherDTO>) {
-        weatherApi.getWeather(BuildConfig.YOUR_API_KEY, lat, lon).enqueue(callback)
+        weatherApi.getWeather(YOUR_API_KEY, lat, lon).enqueue(callback)
     }
 
     private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {

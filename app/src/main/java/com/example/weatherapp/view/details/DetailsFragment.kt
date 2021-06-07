@@ -14,7 +14,7 @@ import com.example.weatherapp.model.Weather
 import com.example.weatherapp.utils.showSnackBar
 import com.example.weatherapp.viewmodel.AppState
 import com.example.weatherapp.viewmodel.DetailsViewModel
-import com.guthub.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.squareup.picasso.Picasso
 
 class DetailsFragment : Fragment() {

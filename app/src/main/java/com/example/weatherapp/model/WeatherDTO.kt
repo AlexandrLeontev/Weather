@@ -1,7 +1,7 @@
 package com.example.weatherapp.model
 
 data class WeatherDTO(
-        val fact: FactDTO?
+    val fact: FactDTO?
 )
 
 data class FactDTO(
