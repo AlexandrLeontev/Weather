@@ -2,9 +2,13 @@ package com.example.weatherapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.weatherapp.app.App.Companion.getHistoryDao
+import com.example.weatherapp.app.AppState
+import com.example.weatherapp.model.Weather
 import com.example.weatherapp.model.WeatherDTO
 import com.example.weatherapp.repository.DetailsRepository
 import com.example.weatherapp.repository.DetailsRepositoryImpl
+import com.example.weatherapp.repository.LocalRepositoryImpl
 import com.example.weatherapp.repository.RemoteDataSource
 import com.example.weatherapp.utils.convertDtoToModel
 import retrofit2.Call
@@ -16,28 +20,31 @@ private const val REQUEST_ERROR = "Ошибка запроса на сервер
 private const val CORRUPTED_DATA = "Неполные данные"
 
 class DetailsViewModel(
-    private val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource())
+        val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
+        private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource()),
+        private val historyRepositoryImpl: LocalRepositoryImpl = LocalRepositoryImpl(getHistoryDao())
 ) : ViewModel() {
-
-    fun getLiveData() = detailsLiveData
 
     fun getWeatherFromRemoteSource(lat: Double, lon: Double) {
         detailsLiveData.value = AppState.Loading
         detailsRepositoryImpl.getWeatherDetailsFromServer(lat, lon, callBack)
     }
 
+    fun saveCityToDB(weather: Weather) {
+        historyRepositoryImpl.saveEntity(weather)
+    }
+
     private val callBack = object :
-        Callback<WeatherDTO> {
+            Callback<WeatherDTO> {
 
         override fun onResponse(call: Call<WeatherDTO>, response: Response<WeatherDTO>) {
             val serverResponse: WeatherDTO? = response.body()
             detailsLiveData.postValue(
-                if (response.isSuccessful && serverResponse != null) {
-                    checkResponse(serverResponse)
-                } else {
-                    AppState.Error(Throwable(SERVER_ERROR))
-                }
+                    if (response.isSuccessful && serverResponse != null) {
+                        checkResponse(serverResponse)
+                    } else {
+                        AppState.Error(Throwable(SERVER_ERROR))
+                    }
             )
         }
 

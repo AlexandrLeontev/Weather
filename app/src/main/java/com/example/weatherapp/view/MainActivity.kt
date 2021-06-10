@@ -3,11 +3,13 @@ package com.example.weatherapp.view
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.MainActivityBinding
-import com.example.weatherapp.view.experiments.ThreadsFragment
+import com.example.weatherapp.view.experiments.ContentProviderFragment
+import com.example.weatherapp.view.history.HistoryFragment
 import com.example.weatherapp.view.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -32,14 +34,28 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_screen_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_threads -> {
+            R.id.menu_history -> {
                 supportFragmentManager.apply {
                     beginTransaction()
-                            .add(R.id.container, ThreadsFragment.newInstance())
-                            .addToBackStack("")
-                            .commitAllowingStateLoss()
+                        .add(R.id.container, HistoryFragment.newInstance())
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
+                }
+                true
+            }
+            R.id.menu_content_provider -> {
+                supportFragmentManager.apply {
+                    beginTransaction()
+                        .add(R.id.container, ContentProviderFragment.newInstance())
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
                 }
                 true
             }
@@ -47,4 +63,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-

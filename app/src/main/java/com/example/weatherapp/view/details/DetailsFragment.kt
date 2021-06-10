@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
+import com.example.weatherapp.app.AppState
 import com.example.weatherapp.databinding.FragmentDetailsBinding
+import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.utils.showSnackBar
-import com.example.weatherapp.viewmodel.AppState
 import com.example.weatherapp.viewmodel.DetailsViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.squareup.picasso.Picasso
@@ -35,7 +35,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         weatherBundle = arguments?.getParcelable(BUNDLE_EXTRA) ?: Weather()
-        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
+        viewModel.detailsLiveData.observe(viewLifecycleOwner, { renderData(it) })
         viewModel.getWeatherFromRemoteSource(weatherBundle.city.lat, weatherBundle.city.lon)
     }
 
@@ -43,16 +43,16 @@ class DetailsFragment : Fragment() {
         when (appState) {
             is AppState.Success -> {
                 binding.mainView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 setWeather(appState.weatherData[0])
             }
             is AppState.Loading -> {
                 binding.mainView.visibility = View.GONE
-                binding.loadingLayout.visibility = View.VISIBLE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 binding.mainView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 binding.mainView.showSnackBar(
                     getString(R.string.error),
                     getString(R.string.reload),
@@ -69,12 +69,15 @@ class DetailsFragment : Fragment() {
     private fun setWeather(weather: Weather) {
         with(binding) {
             val city = weatherBundle.city
+            saveCity(city, weather)
+
             cityName.text = city.city
             cityCoordinates.text = String.format(
                 getString(R.string.city_coordinates),
                 city.lat.toString(),
                 city.lon.toString()
             )
+
 
             weather.icon?.let {
                 GlideToVectorYou.justLoadImage(
@@ -97,6 +100,20 @@ class DetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun saveCity(
+        city: City,
+        weather: Weather
+    ) {
+        viewModel.saveCityToDB(
+            Weather(
+                city,
+                weather.temperature,
+                weather.feelsLike,
+                weather.condition
+            )
+        )
     }
 
     companion object {
