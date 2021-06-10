@@ -23,7 +23,7 @@
 
         <service android:name=".view.experiments.MainService" />
 
-        <receiver android:name=".view.MyBroadcastReceiver">
+        <receiver android:name=".view.MainBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
@@ -34,7 +34,5 @@
             android:authorities="@string/authorities"
             android:enabled="true"
             android:exported="true" />
-
     </application>
-
 </manifest>
