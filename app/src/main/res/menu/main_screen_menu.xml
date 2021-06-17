@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_content_provider"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/content_provider"
+        android:title="@string/google_maps"
         app:showAsAction="always" />
 
     <item

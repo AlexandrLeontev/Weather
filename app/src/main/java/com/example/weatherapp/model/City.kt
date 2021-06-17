@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class City(
-        val city: String,
-        val lat: Double,
-        val lon: Double
+    val city: String,
+    val lat: Double,
+    val lon: Double
 ) : Parcelable
