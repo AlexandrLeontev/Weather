@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.MainActivityBinding
 import com.example.weatherapp.view.experiments.ContentProviderFragment
+import com.example.weatherapp.view.googlemaps.GoogleMapsFragment
 import com.example.weatherapp.view.history.HistoryFragment
 import com.example.weatherapp.view.main.MainFragment
 
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_content_provider -> {
                 supportFragmentManager.apply {
                     beginTransaction()
-                        .add(R.id.container, ContentProviderFragment.newInstance())
+                        .add(R.id.container, GoogleMapsFragment.newInstance())
                         .addToBackStack("")
                         .commitAllowingStateLoss()
                 }

@@ -53,13 +53,6 @@ class GoogleMapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        val localMapFragment = SupportMapFragment() // новый код
-//        childFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.map, localMapFragment)
-//            .commit()
-
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
         initSearchByAddress()
