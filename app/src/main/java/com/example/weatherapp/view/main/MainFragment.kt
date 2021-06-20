@@ -21,12 +21,10 @@ import com.example.weatherapp.app.AppState
 import com.example.weatherapp.databinding.FragmentMainBinding
 import com.example.weatherapp.model.City
 import com.example.weatherapp.model.Weather
-import com.example.weatherapp.utils.showSnackBar
 import com.example.weatherapp.view.details.DetailsFragment
 import com.example.weatherapp.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
-import java.util.*
 
 private const val IS_WORLD_KEY = "LIST_OF_CITIES_KEY"
 private const val REQUEST_CODE = 12345
