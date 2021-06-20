@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
@@ -29,6 +30,7 @@ class GoogleMapsFragment : Fragment() {
     private val markers: ArrayList<Marker> = arrayListOf()
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
+
         val initialPlace = LatLng(52.52000659999999, 13.404953999999975)
         googleMap.addMarker(
                 MarkerOptions().position(initialPlace).title(getString(R.string.marker_start))
@@ -61,10 +63,10 @@ class GoogleMapsFragment : Fragment() {
     private fun initSearchByAddress() {
         binding.buttonSearch.setOnClickListener {
             val geoCoder = Geocoder(it.context)
-            val searchText = searchAddress.text.toString()
+            val searchText = binding.searchAddress.text.toString()
             Thread {
                 try {
-                    val addresses = geoCoder.getFromLocationName(searchText, 1)
+                    val addresses = geoCoder.getFromLocationName(searchText, 10)
                     if (addresses.size > 0) {
                         goToAddress(addresses, it, searchText)
                     }
@@ -96,18 +98,16 @@ class GoogleMapsFragment : Fragment() {
     }
 
     private fun getAddressAsync(location: LatLng) {
-        context?.let {
-            val geoCoder = Geocoder(it)
+        val geoCoder = Geocoder(requireContext())
             Thread {
                 try {
                     val addresses =
                             geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-                    textAddress.post { textAddress.text = addresses[0].getAddressLine(0) }
+                    binding.textAddress.post { binding.textAddress.text = addresses[0].getAddressLine(0) }
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
             }.start()
-        }
     }
 
     private fun addMarkerToArray(location: LatLng) {
@@ -118,7 +118,7 @@ class GoogleMapsFragment : Fragment() {
     private fun setMarker(
             location: LatLng,
             searchText: String,
-            resourceId: Int
+            @DrawableRes resourceId: Int
     ): Marker {
         return map.addMarker(
                 MarkerOptions()

@@ -249,9 +249,14 @@ class MainFragment : Fragment() {
                         location.longitude,
                         1
                 )
-                binding.mainFragmentFAB.post {
-                    showAddressDialog(addresses[0].getAddressLine(0), location)
+                if (addresses.isNotEmpty()){
+                    showDialog(String(), "Нет адреса")
+                    binding.mainFragmentFAB.post {
+                        showAddressDialog(addresses[0].getAddressLine(0), location)
+                    }
+
                 }
+
             } catch (e: IOException) {
                 e.printStackTrace()
             }
