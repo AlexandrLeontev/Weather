@@ -28,7 +28,7 @@
     <string name="dialog_message_last_location_unknown">Местонахождение неизвестно. Включите GPS, если хотите получить погоду по текущему адресу</string>
     <string name="dialog_message_last_known_location">Показана последняя известная локация. Включите GPS, если хотите обновить местонахождение</string>
     <string name="dialog_rationale_title">Доступ к геолокации</string>
-    <string name="dialog_rationale_meaasge">Объяснение</string>
+    <string name="dialog_rationale_message">Объяснение</string>
     <string name="dialog_rationale_give_access">Предоставить доступ</string>
     <string name="dialog_rationale_decline">Не надо</string>
     <string name="dialog_address_title">Ваш адрес</string>
