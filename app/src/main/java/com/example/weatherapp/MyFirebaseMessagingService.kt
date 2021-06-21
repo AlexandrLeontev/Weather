@@ -15,6 +15,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val remoteMessageData = remoteMessage.data
         if (remoteMessageData.isNotEmpty()) {
             handleDataMessage(remoteMessageData.toMap())
+        } else {
+            showNotification(remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!)
         }
     }
 
@@ -28,6 +30,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun showNotification(title: String, message: String) {
         val notificationBuilder =
+            // тут идёт оформление дизайна уведомления
                 NotificationCompat.Builder(applicationContext, CHANNEL_ID).apply {
                     setSmallIcon(R.drawable.ic_kotlin_logo)
                     setContentTitle(title)
@@ -48,7 +51,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun createNotificationChannel(notificationManager: NotificationManager) {
         val name = "Channel name"
         val descriptionText = "Channel description"
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        //тут указываем приоритет уведомления
+        val importance = NotificationManager.IMPORTANCE_HIGH
         val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
             description = descriptionText
         }
