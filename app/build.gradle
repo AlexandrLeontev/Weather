@@ -34,9 +34,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"RELEASE"'
         }
+
+        beta {
+            initWith debug
+            versionNameSuffix "-beta"
+            buildConfigField "String", "TYPE", '"BETA"'
+        }
+
         debug {
             versionNameSuffix "-debug"
+            buildConfigField "String", "TYPE", '"DEBUG"'
         }
     }
 
@@ -50,7 +59,7 @@ android {
 
     flavorDimensions 'version'
     productFlavors {
-        freeConfig {
+        free {
             dimension 'version'
             versionNameSuffix '.free'
         }

@@ -37,4 +37,7 @@
     <string name="button_search_map">Search</string>
     <string name="marker_start">Start</string>
     <string name="title_activity_maps">Map</string>
+    <string name="debug_version_title">Это DEBUG-Версия</string>
+    <string name="freeconfig_title">Это FreeConfig-Версия</string>
+    <string name="paid_title">Это Paid-Версия</string>
 </resources>
